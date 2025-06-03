@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Semáforo Inteligente</title>
+    <link rel="stylesheet" href="CSS/login.css">
+</head>
+
+<body>
+    <!-- Área para o recebimento do nome -->
+    <div class="container">
+        <h1>Semáforo Inteligente</h1>
+        <label for="nome">Digite seu nome:</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
+        <button id="btnEntrar">Entrar</button>
+        <p id="msgErro"></p>
+    </div>
+
+    <script>
+        const nomeInput = document.getElementById("nome");
+        const msgErro = document.getElementById("msgErro");
+
+        // Limpa a mensagem de erro enquanto o usuário digita
+        nomeInput.addEventListener("input", function () {
+            msgErro.innerText = "";
+        });
+
+        // Valida e armazena o nome ao clicar em "Entrar"
+        document.getElementById("btnEntrar").addEventListener("click", function () {
+            const nome = nomeInput.value.trim();
+
+            if (nome === "") {
+                msgErro.innerText = "Digite seu nome para avançar!";
+                return;
+            }
+
+            localStorage.setItem("usuario", nome);
+            window.location.href = "semaforo.html";
+        });
+    </script>
+
+</body>
+</html>
