@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semáforo Inteligente</title>
+  <link rel="stylesheet" href="CSS/semaforo.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Olá, <span id="nomeUsuario"></span>!</h2>
+
+    <div class="semaforo-wrapper">
+      <img src="IMGs/semáforo.png" alt="Semáforo" class="semaforo-base">
+
+      <img src="IMGs/vermelho.png" class="luz vermelha" id="luzVermelha" style="display: none;">
+      <img src="IMGs/amarelo.png" class="luz amarela" id="luzAmarela" style="display: none;">
+      <img src="IMGs/verde.png" class="luz verde" id="luzVerde" style="display: none;">
+    </div>
+
+    <button id="botaoTravessia" title="Solicitar travessia">✋</button>
+  </div>
+
+  <script src="JS/semaforo.js"></script>
+</body>
+</html>
