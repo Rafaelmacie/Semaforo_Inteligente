@@ -1,3 +1,5 @@
+/* Modificações gerais da página */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,7 +15,9 @@ body {
     align-items: center;
 }
 
-.container {
+
+/* Container de login */
+.container{
     background: white;
     padding: 3%;
     border-radius: 9px;
@@ -23,13 +27,13 @@ body {
     max-width: 700px;
 }
 
-h1 {
+h1{
     margin-bottom: 10%;
     color: #333;
     font-size: x-large;
 }
 
-label {
+label{
     display: block;
     margin-bottom: 2%;
     font-weight: bold;
@@ -37,7 +41,7 @@ label {
     font-size: 1em;
 }
 
-input[type="text"] {
+input[type="text"]{
     width: 100%;
     padding: 3%;
     margin-bottom: 5%;
@@ -46,7 +50,7 @@ input[type="text"] {
     font-size: 1em;
 }
 
-button {
+button{
     width: 100%;
     padding: 3%;
     background-color: #28a745;
@@ -59,11 +63,11 @@ button {
     transition: background-color 0.2s ease;
 }
 
-button:hover {
+button:hover{
     background-color: #218838;
 }
 
-#msgErro {
+#msgErro{
     color: red;
     margin-top: 3%;
     font-size: medium;
