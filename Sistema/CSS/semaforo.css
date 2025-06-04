@@ -1,0 +1,71 @@
+/* Modificações gerais da página */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Container do semáforo */
+.container{
+    text-align: center;
+}
+
+h2{
+    margin-bottom: 20px;
+}
+
+.semaforo-wrapper{
+    position: relative;
+    display: inline-block;
+}
+
+.semaforo-base{
+    max-width: 200px;
+}
+
+#botaoTravessia {
+    margin-top: 25px;
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: white;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+#botaoTravessia:hover {
+    background-color: #333;
+}
+
+/* Luzes */
+.luz{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.luz.vermelha{
+    top: 15px;
+}
+
+.luz.amarela{
+    top: 75px;
+}
+
+.luz.verde{
+    top: 135px;
+}
