@@ -33,6 +33,37 @@ h2{
     max-width: 200px;
 }
 
+
+/* Luzes */
+.luz{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.luz.vermelha{
+    top: 30px;
+}
+
+.luz.amarela{
+    top: 80px;
+}
+
+.luz.verde{
+    top: 130px;
+}
+
+/* Contador e botão de travessia */
+
+#contador {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
 #botaoTravessia {
     margin-top: 25px;
     padding: 10px 20px;
@@ -47,25 +78,4 @@ h2{
 
 #botaoTravessia:hover {
     background-color: #333;
-}
-
-/* Luzes */
-.luz{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.luz.vermelha{
-    top: 15px;
-}
-
-.luz.amarela{
-    top: 75px;
-}
-
-.luz.verde{
-    top: 135px;
 }
