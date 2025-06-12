@@ -22,11 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Variável que armazena o botão
     const botaoTravessia = document.getElementById("botaoTravessia");
 
-    // Variável que armazena o elemento do contador
+    // Variáveis dos elementos de mensagens
     const contador = document.getElementById("contador");
-
-    // Parágrafo para exibir mensagens de travessia
     const mensagemTravessia = document.getElementById("mensagemTravessia");
+    const estadoCarros = document.getElementById("estadoCarros");
 
     // Função para mostrar cada luz, de acordo com os valores passados pelo parâmetro
     function mostrarLuz(vermelho, amarelo, verde) {
@@ -38,76 +37,78 @@ document.addEventListener("DOMContentLoaded", function () {
     // Estado atual do semáforo (0 = verde, 1 = amarelo, 2 = vermelho)
     let estado = 0;
 
-    // Tempo padrão para cada fase (em segundos)
-    const TEMPO_PADRAO = 5;
-    const TEMPO_AMARELO = 2;
-    let tempoVerde = TEMPO_PADRAO;
+    // Tempo que cada luz permanece acesa (em segundos)
+    let tempoVerde = 5;
+    let tempoAmarelo = 2;
+    let tempoVermelho = 5;
+
+    // Contador regressivo
     let segundosRestantes = tempoVerde;
 
-    // Flag para detectar travessia solicitada
+    // Flag para detectar se travessia foi solicitada
     let travessiaSolicitada = false;
 
-    // Função que atualiza a luz do semáforo conforme o estado atual
+    // Atualiza a luz do semáforo com base no estado atual
     function atualizarSemaforo() {
-        // Remove qualquer mensagem anterior
-        mensagemTravessia.textContent = "";
-
         if (estado === 0) {
             mostrarLuz(false, false, true); // verde
+            estadoCarros.textContent = "Carros em movimento";
         } else if (estado === 1) {
             mostrarLuz(false, true, false); // amarelo
+            estadoCarros.textContent = "Carros em movimento";
         } else {
             mostrarLuz(true, false, false); // vermelho
+            estadoCarros.textContent = "Carros parados";
         }
     }
 
-    // Função que atualiza o contador na tela a cada segundo
+    // Atualiza o contador e troca de estado quando necessário
     function atualizarContador() {
         contador.textContent = segundosRestantes + "s";
         segundosRestantes--;
 
-        // Quando o tempo da fase atual acabar, muda para a próxima
+        // Quando o tempo da fase acabar
         if (segundosRestantes < 0) {
+            // Muda o estado do semáforo
             estado = (estado + 1) % 3;
+            atualizarSemaforo();
 
-            // Redefine tempos conforme o novo estado
-            if (estado === 0) {
-                tempoVerde = TEMPO_PADRAO; // reseta tempo do verde
+            // Remove a mensagem de travessia ao trocar de luz
+            mensagemTravessia.textContent = "";
+
+            // Define novo tempo para a próxima fase
+            if (estado === 0) { // verde
                 segundosRestantes = tempoVerde;
-            } else if (estado === 1) {
-                segundosRestantes = TEMPO_AMARELO;
-            } else {
-                segundosRestantes = TEMPO_PADRAO;
+            } else if (estado === 1) { // amarelo
+                segundosRestantes = tempoAmarelo;
+            } else if (estado === 2) { // vermelho
+                segundosRestantes = tempoVermelho;
+                // Após o vermelho, reinicia a flag de travessia
+                travessiaSolicitada = false;
             }
-
-            travessiaSolicitada = false; // reseta a travessia
-            atualizarSemaforo();         // atualiza a luz
         }
     }
 
-    // Inicializa semáforo e contador ao carregar a página
+    // Inicializa semáforo e contador
     atualizarSemaforo();
     atualizarContador();
-
-    // Atualiza o contador e o semáforo a cada segundo
     setInterval(atualizarContador, 1000);
 
     // Evento de clique no botão de travessia
     botaoTravessia.addEventListener("click", () => {
-        if (estado === 0) {
-            // Semáforo verde
+        if (estado === 0) { // verde
             if (!travessiaSolicitada) {
                 mensagemTravessia.style.color = "blue";
                 mensagemTravessia.textContent = "Travessia solicitada, aguarde o sinal ficar vermelho";
-                segundosRestantes = Math.min(segundosRestantes, 2); // reduz o tempo se for maior que 2
                 travessiaSolicitada = true;
+                if (segundosRestantes > 2) {
+                    segundosRestantes = 2; // reduz tempo do verde
+                }
             }
-        } else if (estado === 1) {
-            // Semáforo amarelo
+        } else if (estado === 1) { // amarelo
             mensagemTravessia.style.color = "orange";
             mensagemTravessia.textContent = "Aguarde só mais um pouco";
-        } else {
-            // Semáforo vermelho
+        } else if (estado === 2) { // vermelho
             mensagemTravessia.style.color = "green";
             mensagemTravessia.textContent = "Você já pode atravessar";
         }
