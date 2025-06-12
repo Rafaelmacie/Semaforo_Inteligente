@@ -32,24 +32,28 @@ document.addEventListener("DOMContentLoaded", function () {
         luzVerde.style.display = verde ? "block" : "none";
     }
 
-    // Estado atual do semáforo (0 = vermelho, 1 = amarelo, 2 = verde)
+    // Estado atual do semáforo (0 = verde, 1 = amarelo, 2 = vermelho)
     let estado = 0;
 
-    // Tempo que cada luz permanece acesa (em segundos)
-    let tempoPorFase = 5;
+    // Tempos para cada fase
+    let tempoVerde = 5;
     let tempoAmarelo = 1;
+    let tempoVermelho = 5;
 
     // Contador regressivo que será exibido na tela
-    let segundosRestantes = tempoPorFase;
+    let segundosRestantes = tempoVerde;
 
     // Função que atualiza a luz do semáforo conforme o estado atual
     function atualizarSemaforo() {
         if (estado === 0) {
-            mostrarLuz(true, false, false); // vermelho
+            mostrarLuz(false, false, true); // verde
+            segundosRestantes = tempoVerde;
         } else if (estado === 1) {
             mostrarLuz(false, true, false); // amarelo
+            segundosRestantes = tempoAmarelo;
         } else {
-            mostrarLuz(false, false, true); // verde
+            mostrarLuz(true, false, false); // vermelho
+            segundosRestantes = tempoVermelho;
         }
     }
 
@@ -58,15 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
         contador.textContent = segundosRestantes + "s"; // mostra contador
         segundosRestantes--;
 
-        // Quando o tempo da fase atual acabar, muda para a próxima
         if (segundosRestantes < 0) {
-            estado = (estado + 1) % 3; // próximo estado
-            atualizarSemaforo();       // atualiza luz
-            if(estado == 1){
-                segundosRestantes = tempoAmarelo
-            }else{
-                segundosRestantes = tempoPorFase; // reinicia contador
-            }
+            estado = (estado + 1) % 3; // próximo estado: verde → amarelo → vermelho → verde...
+            atualizarSemaforo();
         }
     }
 
