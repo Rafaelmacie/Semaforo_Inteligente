@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (nome && nomeUsuario) {
         nomeUsuario.textContent = nome;
     } else {
-        window.location.href = "index.html";
+        window.location.href = "../index.html";
     }
 
     // Variáveis que armazenam as luzes
